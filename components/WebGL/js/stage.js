@@ -1,5 +1,13 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { variable } from './variable';
+
+const lightColor = {
+  top: 0xffffff,
+  bottom: 0xeeeeee,
+};
+
+let resizeTimeoutId = 0;
 
 export class Stage {
   constructor() {
@@ -27,7 +35,6 @@ export class Stage {
     });
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.setSize(this.canvasSize.w, this.canvasSize.h);
-    this.renderer.setClearColor(0x000000);
 
     this.scene = new THREE.Scene();
 
@@ -43,9 +50,47 @@ export class Stage {
     this.camera.position.z = dist;
 
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+
+    const light01 = new THREE.HemisphereLight(
+      lightColor.top,
+      lightColor.bottom,
+      0.8
+    );
+    this.scene.add(light01);
+
+    const light02 = new THREE.DirectionalLight(0xffffff, 0.2);
+    light02.position.set(1000, 1000, 0);
+    this.scene.add(light02);
+
+    this.scene.fog = new THREE.Fog(variable.colors[0].base, 5000, 6000);
+
+    // リサイズ
+    window.addEventListener('resize', () => {
+      // setTimeout()がセットされていたら無視
+      if (resizeTimeoutId) return;
+
+      resizeTimeoutId = setTimeout(() => {
+        this.resize();
+        resizeTimeoutId = 0;
+      }, 500);
+    });
   }
 
   loop() {
     this.renderer.render(this.scene, this.camera);
+  }
+
+  resize() {
+    // サイズを取得
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    // レンダラーのサイズを調整する
+    this.renderer.setPixelRatio(window.devicePixelRatio);
+    this.renderer.setSize(width, height);
+
+    // カメラのアスペクト比を正す
+    this.camera.aspect = width / height;
+    this.camera.updateProjectionMatrix();
   }
 }
