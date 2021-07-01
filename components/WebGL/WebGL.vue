@@ -14,13 +14,20 @@ export default {
       webglCanvas: null,
     };
   },
+  watch: {
+    '$route.name'(to, from) {
+      // url変更を検知して背景色や文字を設定
+      this.webglCanvas.pageTransition(to);
+    },
+  },
   mounted() {
     // canvas要素を渡す。
     this.webglCanvas = new WebglCanvas({
       $canvas: this.$refs.canvas,
     });
-    this.webglCanvas.init();
+    this.webglCanvas.init(this.$route.name);
   },
+
   destroyed() {
     // canvasを作ったり壊したりする前提の場合はここに処理停止する処理を書く（今回省略）。
   },
