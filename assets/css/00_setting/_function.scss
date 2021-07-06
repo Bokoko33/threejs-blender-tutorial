@@ -1,0 +1,11 @@
+@function vw($size) {
+  @return $size / 1366 * 100vw;
+}
+
+@function vw_sp($size) {
+  @return $size / 375 * 100vw;
+}
+
+@function rem($size) {
+  @return $size / 16 * 1rem;
+}

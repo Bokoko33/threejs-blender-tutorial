@@ -1,3 +1,3 @@
 <template>
-  <div>page01</div>
+  <div></div>
 </template>
