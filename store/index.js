@@ -2,7 +2,7 @@ const colors = [
   {
     base: '#9be3de',
     sub1: '#fffdf9',
-    sub2: '#ffe3ed',
+    sub2: '#ffadca',
   },
   {
     base: '#ffc996',
