@@ -17,4 +17,5 @@ export const variable = {
     },
   ],
   routeNames: ['index', 'page01', 'page02'],
+  animationTime: 3,
 };

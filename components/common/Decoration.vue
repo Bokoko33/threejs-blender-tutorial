@@ -25,7 +25,7 @@ export default {
     // ２枚の円を入れ替えながら背景と右上の装飾を切り替える
     scaleEllipse() {
       const tl = gsap.timeline();
-      tl.totalTime(2);
+      tl.delay(0.4);
       tl.to(this.$refs[`ellipse0${this.ellipse}`], {
         scale: 4,
         duration: 1.2,
@@ -76,6 +76,7 @@ export default {
   position: absolute;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 .deco-ellipse {
   position: absolute;

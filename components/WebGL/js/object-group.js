@@ -105,6 +105,7 @@ export class ObjectGroup {
     gsap.to(this.mesh.rotation, {
       y: `+=${rotateValue}`,
       duration: 2,
+      delay: 0.3,
       ease: 'Power2.easeInOut',
     });
   }
@@ -129,6 +130,7 @@ export class ObjectGroup {
             r: newColor.r,
             g: newColor.g,
             b: newColor.b,
+            delay: 0.3,
             duration: 2,
             ease: 'Power2.easeInOut',
           });

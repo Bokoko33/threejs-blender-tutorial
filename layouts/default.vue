@@ -1,5 +1,5 @@
 <template>
-  <div :style="styles" class="page">
+  <div class="page">
     <Decoration ref="decoration" />
     <client-only>
       <WebGL />
@@ -19,15 +19,6 @@ export default {
   components: {
     TheNavigation,
   },
-  computed: {
-    styles() {
-      return {
-        '--current-color-base': this.$store.state.currentColors.base,
-        '--current-color-sub1': this.$store.state.currentColors.sub1,
-        '--current-color-sub2': this.$store.state.currentColors.sub2,
-      };
-    },
-  },
   watch: {
     '$route.name'(to, from) {
       // url変更を検知して背景色や文字を設定
@@ -36,6 +27,7 @@ export default {
       this.$refs.decoration.scaleEllipse();
       this.$refs.navigation.changeColor();
       this.$refs.title.changeColor();
+      this.$refs.title.staggerAnimation();
     },
   },
   created() {
@@ -51,6 +43,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .page-inner {

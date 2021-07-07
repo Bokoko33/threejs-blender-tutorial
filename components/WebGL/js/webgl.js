@@ -24,10 +24,6 @@ export class WebGL {
     this.objectGroup = new ObjectGroup(objectMarker);
     this.objectGroup.initModel(colorList);
 
-    // 背景色設定
-    // background.init(colorList);
-    // this.props.$wrapper.style.backgroundColor = colorList.base;
-
     // initGUI(this.objectGroup);
 
     // リサイズ
@@ -55,13 +51,6 @@ export class WebGL {
 
   pageTransition(routeName) {
     const newColors = this.getCurrentColors(routeName);
-
-    // background.changeColor(newColors);
-    // gsap.to(this.props.$wrapper, {
-    //   backgroundColor: newColors.base,
-    //   duration: 2,
-    //   ease: 'Power2.easeInOut',
-    // });
 
     this.objectGroup.colorChangeAnimation(newColors);
     this.objectGroup.rotateAnimation();

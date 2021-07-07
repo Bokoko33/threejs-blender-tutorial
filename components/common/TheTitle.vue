@@ -3,9 +3,9 @@
     <p ref="tag" class="title-tag">
       #Three.js #WebGL #blender #3D #creativecoding
     </p>
-    <h1 class="title-main">
-      Three.js and Blender<br />
-      Tutorial
+    <h1 ref="copy" class="title-main">
+      <span class="title-main__group">Three.js &amp; Blender</span>
+      <span class="title-main__group">Tutorial</span>
     </h1>
     <p ref="sub" class="title-sub">
       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -20,23 +20,144 @@
 import { gsap } from 'gsap';
 
 export default {
+  data() {
+    return {
+      titleGroup: [],
+    };
+  },
   mounted() {
     this.$refs.title.style.color = this.$store.state.currentColors.sub1;
-    // this.$refs.tag.style.color = this.$store.state.currentColors.sub1;
-    // this.$refs.sub.style.color = this.$store.state.currentColors.sub1;
+
+    // タイトルを分割
+    this.titleGroup = [
+      ...this.$refs.copy.querySelectorAll('.title-main__group'),
+    ];
+    for (const el of this.titleGroup) {
+      el.innerHTML = this.splitText(el);
+      el.char = el.querySelectorAll('span');
+    }
   },
   methods: {
     changeColor() {
-      gsap.to(this.$refs.title, {
+      gsap.to(this.$refs.tag, {
         color: this.$store.state.currentColors.sub1,
         duration: 2,
         ease: 'Power3.easeInOut',
       });
-      // gsap.to(this.$refs.sub, {
-      //   color: this.$store.state.currentColors.sub1,
-      //   duration: 2,
-      //   ease: 'Power3.easeInOut',
-      // });
+      gsap.to(this.$refs.sub, {
+        color: this.$store.state.currentColors.sub1,
+        duration: 2,
+        ease: 'Power3.easeInOut',
+      });
+    },
+    staggerAnimation() {
+      const tl = gsap.timeline();
+
+      tl.to(this.titleGroup[0].char, {
+        yPercent: -120,
+        stagger: 0.05,
+        ease: 'Power3.easeInOut',
+      })
+        .to(
+          this.titleGroup[1].char,
+          {
+            yPercent: -120,
+            stagger: 0.05,
+            ease: 'Power3.easeInOut',
+          },
+          '<+=0.3'
+        )
+        .to(
+          this.titleGroup[0].char,
+          {
+            opacity: 0,
+            duration: 0.01,
+          },
+          '+=0.01'
+        )
+        .to(
+          this.titleGroup[1].char,
+          {
+            opacity: 0,
+            duration: 0.01,
+          },
+          '<'
+        )
+        .to(
+          this.titleGroup[0].char,
+          {
+            yPercent: 120,
+            duration: 0.01,
+          },
+          '+=0.01'
+        )
+        .to(
+          this.titleGroup[1].char,
+          {
+            yPercent: 120,
+            duration: 0.01,
+          },
+          '<'
+        )
+        .to(
+          this.titleGroup[0].char,
+          {
+            opacity: 1,
+            color: this.$store.state.currentColors.sub1,
+            duration: 0.01,
+          },
+          '+=0.01'
+        )
+        .to(
+          this.titleGroup[1].char,
+          {
+            opacity: 1,
+            color: this.$store.state.currentColors.sub1,
+            duration: 0.01,
+          },
+          '<'
+        )
+        .to(
+          this.titleGroup[0].char,
+          {
+            yPercent: 0,
+            stagger: 0.05,
+            ease: 'Power3.easeInOut',
+          },
+          '+=0.1'
+        )
+        .to(
+          this.titleGroup[1].char,
+          {
+            yPercent: 0,
+            stagger: 0.05,
+            ease: 'Power3.easeInOut',
+          },
+          '<+=0.3'
+        );
+    },
+    splitText(target) {
+      const nodes = [...target.childNodes];
+
+      let spanWrapText = '';
+
+      nodes.forEach((node) => {
+        if (node.nodeType === 3) {
+          // テキストの場合
+          const text = node.textContent.replace(/\r?\n/g, ''); // テキストから改行コード削除
+          // spanで囲んで連結
+          spanWrapText += text.split('').reduce((acc, v) => {
+            v = v.replace(' ', '&nbsp;'); // スペースは正規表現で挟まないと幅がなくなる
+            return acc + `<span style="display: inline-block;">${v}</span>`;
+          }, '');
+        } else {
+          // テキスト以外
+          // <br>などテキスト以外の要素をそのまま連結
+          spanWrapText += node.outerHTML;
+        }
+      });
+
+      return spanWrapText;
     },
   },
 };
@@ -57,10 +178,16 @@ p {
 }
 
 .title-main {
+  display: block;
   font-size: min(5.8vw, 80px);
   font-family: 'Cormorant Garamond', serif;
   font-weight: 500;
   margin-top: 16px;
+}
+
+.title-main__group {
+  display: block;
+  overflow: hidden;
 }
 
 .title-sub {
