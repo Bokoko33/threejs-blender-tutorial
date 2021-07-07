@@ -1,19 +1,19 @@
 export const variable = {
   colors: [
     {
-      base: '#9be3de',
-      sub1: '#fffdf9',
-      sub2: '#ffe3ed',
+      base: '#FEFAE3',
+      sub1: '#9c4766',
+      sub2: '#F6EEC6',
     },
     {
-      base: '#ffc996',
+      base: '#8F74E3',
+      sub1: '#FFFEFF',
+      sub2: '#9D92B1',
+    },
+    {
+      base: '#FFDFC2',
       sub1: '#ff8474',
-      sub2: '#583d72',
-    },
-    {
-      base: '#d8e3e7',
-      sub1: '#51c4d3',
-      sub2: '#126e82',
+      sub2: '#714F92',
     },
   ],
   routeNames: ['index', 'page01', 'page02'],

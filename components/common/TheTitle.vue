@@ -170,7 +170,6 @@ p {
 }
 .title {
   padding-top: 20vh;
-  color: var(--current-color-sub1);
 }
 
 .title-tag {
