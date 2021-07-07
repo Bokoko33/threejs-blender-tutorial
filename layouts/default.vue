@@ -6,19 +6,14 @@
     </client-only>
     <Nuxt />
     <div class="page-inner">
-      <TheNavigation ref="navigation" />
       <TheTitle ref="title" />
     </div>
+    <TheNavigation ref="navigation" />
   </div>
 </template>
 
 <script>
-import TheNavigation from '~/components/common/TheNavigation.vue';
-
 export default {
-  components: {
-    TheNavigation,
-  },
   watch: {
     '$route.name'(to, from) {
       // url変更を検知して背景色や文字を設定
@@ -50,6 +45,7 @@ export default {
   position: relative;
   width: 80vw;
   max-width: 1280px;
-  height: 84vh;
+  height: 100vh;
+  max-height: 800px;
 }
 </style>

@@ -169,17 +169,17 @@ p {
   letter-spacing: 0.05em;
 }
 .title {
-  padding-top: 15.6vh;
+  padding-top: 20vh;
   color: var(--current-color-sub1);
 }
 
 .title-tag {
-  font-size: 14px;
+  font-size: min(2vw, 18px);
 }
 
 .title-main {
   display: block;
-  font-size: min(5.8vw, 80px);
+  font-size: min(5.8vw, 90px);
   font-family: 'Cormorant Garamond', serif;
   font-weight: 500;
   margin-top: 16px;
@@ -192,10 +192,10 @@ p {
 
 .title-sub {
   position: relative;
-  width: min(38vw, 500px);
+  width: min(38vw, 600px);
   line-height: 1.8;
   margin-top: 56px;
-  font-size: 16px;
+  font-size: min(2vw, 18px);
 
   &::before {
     content: '';

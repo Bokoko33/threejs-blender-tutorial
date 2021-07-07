@@ -52,7 +52,7 @@ export default {
   position: absolute;
   height: 60px;
   padding: 0 48px;
-  bottom: 0;
+  bottom: 60px;
   left: 50%;
   transform: translateX(-50%);
   border-radius: 999px;

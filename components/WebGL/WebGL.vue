@@ -53,10 +53,7 @@ export default {
   position: absolute;
   width: 40px;
   height: 40px;
-}
-
-.webgl-marker {
   top: 45%;
-  right: 20%;
+  right: max(320px, 25vw);
 }
 </style>
